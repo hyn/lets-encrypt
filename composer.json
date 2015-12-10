@@ -1,0 +1,35 @@
+{
+    "name": "hyn/lets-encrypt",
+    "description": "Automated SSL certificates with Let's Encrypt",
+    "keywords": ["laravel", "lets-encrypt", "ssl", "hyn"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniël `Luceos` Klabbers",
+            "email": "daniel+hyn@klabbers.email"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/hyn/multi-tenant/issues",
+        "source": "https://github.com/hyn/multi-tenant",
+        "docs": "https://hyn.readme.io"
+    },
+    "require": {
+        "hyn/multi-tenant": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : "5.*",
+        "scrutinizer/ocular": "~1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hyn\\LetsEncrypt\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Hyn\\LetsEncrypt\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable"
+}
