@@ -1,5 +1,6 @@
 <?php namespace Hyn\LetsEncrypt\Acme;
 
+use Crypt_RSA;
 use Kelunik\Acme\AcmeClient;
 use Kelunik\Acme\AcmeService;
 use Kelunik\Acme\KeyPair;
@@ -87,7 +88,7 @@ class Client
      */
     protected function setup()
     {
-        if(!$this->keyPair) {
+        if (!$this->keyPair) {
             $this->keyPair = $this->generateKeyPair();
         }
         if (!$this->acmeClient) {
@@ -100,13 +101,23 @@ class Client
         return $this;
     }
 
+    /**
+     * @return KeyPair
+     */
     protected function generateKeyPair()
     {
-        $keys = (new \Crypt_RSA())->createKey(4096);
+        $keys = (new Crypt_RSA())->createKey(4096);
 
         return new KeyPair($keys['privatekey'], $keys['publickey']);
     }
 
+    /**
+     * Pass through for Acme service.
+     *
+     * @param $name
+     * @param $arguments
+     * @return mixed
+     */
     function __call($name, $arguments)
     {
         $this->setup();

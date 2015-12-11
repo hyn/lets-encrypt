@@ -1,6 +1,7 @@
 <?php namespace Hyn\LetsEncrypt\Resources;
 
-use Hyn\LetsEncrypt\Acme\Client;
+use Hyn\LetsEncrypt\Acme\AcmeCallable;
+use Hyn\LetsEncrypt\Helpers\Configured;
 
 /**
  * Class Account
@@ -9,6 +10,8 @@ use Hyn\LetsEncrypt\Acme\Client;
  */
 class Account
 {
+    use AcmeCallable;
+    use Configured;
     /**
      * Username of the account.
      *
@@ -40,6 +43,17 @@ class Account
      */
     public function register()
     {
-        return (new Client())->register($this->emailAddress);
+        $acme = $this->acme();
+
+        if($this->config("{$this->username}.key-pair"))
+        {
+            $acme->setKeyPair($this->config("{$this->username}.key-pair"));
+        }
+
+        $result = $acme->register($this->emailAddress);
+
+        $this->getConfigurationStorage()->set("{$this->username}.key-pair", $acme->getKeyPair());
+
+        return $result;
     }
 }

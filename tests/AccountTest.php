@@ -8,6 +8,6 @@ class AccountTest extends \PHPUnit_Framework_TestCase
     {
         $account = new Account('hyn-test', 'hyn-test@hyn.me');
 
-        $account->register();
+        var_dump($account->register());
     }
 }
