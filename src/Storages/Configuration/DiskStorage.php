@@ -61,4 +61,15 @@ class DiskStorage implements ConfigurationStorageContract
     {
         return sprintf("%s/%s", $this->path, $key);
     }
+
+    /**
+     * Resets a value in the storage.
+     *
+     * @param $key
+     * @return mixed
+     */
+    public function reset($key)
+    {
+        @unlink($this->getKeyPath($key));
+    }
 }

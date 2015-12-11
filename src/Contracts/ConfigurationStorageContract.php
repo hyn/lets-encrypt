@@ -21,4 +21,12 @@ interface ConfigurationStorageContract
      * @return mixed
      */
     public function set($key, $value);
+
+    /**
+     * Resets a value in the storage.
+     *
+     * @param $key
+     * @return mixed
+     */
+    public function reset($key);
 }
