@@ -1,7 +1,7 @@
 {
     "name": "hyn/lets-encrypt",
     "description": "Automated SSL certificates with Let's Encrypt",
-    "keywords": ["laravel", "lets-encrypt", "ssl", "hyn"],
+    "keywords": ["lets-encrypt", "ssl", "hyn"],
     "license": "MIT",
     "authors": [
         {
@@ -10,12 +10,13 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/hyn/multi-tenant/issues",
-        "source": "https://github.com/hyn/multi-tenant",
+        "issues": "https://github.com/hyn/lets-encrypt/issues",
+        "source": "https://github.com/hyn/lets-encrypt",
         "docs": "https://hyn.readme.io"
     },
     "require": {
-        "hyn/multi-tenant": "*"
+        "php": ">=5.5.9",
+        "guzzlehttp/guzzle": "^6.1.0"
     },
     "require-dev": {
         "phpunit/phpunit" : "5.*",
