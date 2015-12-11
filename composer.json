@@ -11,12 +11,12 @@
     ],
     "support": {
         "issues": "https://github.com/hyn/lets-encrypt/issues",
-        "source": "https://github.com/hyn/lets-encrypt",
-        "docs": "https://hyn.readme.io"
+        "source": "https://github.com/hyn/lets-encrypt"
     },
     "require": {
-        "php": ">=5.5.9",
-        "wouter0100/acme": "^0.2.0"
+        "php": ">=5.6.0",
+        "wouter0100/acme": "dev-master",
+        "amphp/artax": "2.x-dev"
     },
     "require-dev": {
         "phpunit/phpunit" : "5.*",

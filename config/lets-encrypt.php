@@ -1,5 +1,8 @@
 <?php
 
 return [
-    'storage' => storage_path('lets-encrypt'),
+    /**
+     * File location to store lets-encrypt files.
+     */
+    'storage' => null,
 ];
