@@ -2,6 +2,7 @@
 
 use Kelunik\Acme\AcmeClient;
 use Kelunik\Acme\AcmeService;
+use Kelunik\Acme\KeyPair;
 
 /**
  * Class Client
@@ -25,6 +26,11 @@ class Client
      * @var AcmeService
      */
     protected $acmeService;
+
+    /**
+     * @var KeyPair
+     */
+    protected $keyPair;
 
     /**
      * Client constructor.
@@ -81,13 +87,51 @@ class Client
      */
     protected function setup()
     {
+        if(!$this->keyPair) {
+            $this->keyPair = $this->generateKeyPair();
+        }
         if (!$this->acmeClient) {
-            $this->acmeClient = new AcmeClient($this->getDictionaryEndpoint());
+            $this->acmeClient = new AcmeClient($this->getDictionaryEndpoint(), $this->getKeyPair());
         }
         if (!$this->acmeService) {
-            $this->acmeService = new AcmeService($this->acmeClient);
+            $this->acmeService = new AcmeService($this->acmeClient, $this->getKeyPair());
         }
 
         return $this;
     }
+
+    protected function generateKeyPair()
+    {
+        $keys = (new \Crypt_RSA())->createKey(4096);
+
+        return new KeyPair($keys['privatekey'], $keys['publickey']);
+    }
+
+    function __call($name, $arguments)
+    {
+        $this->setup();
+
+        return call_user_func_array([$this->acmeService, $name], $arguments);
+    }
+
+    /**
+     * @param KeyPair $keyPair
+     * @return Client
+     */
+    public function setKeyPair($keyPair)
+    {
+        $this->keyPair = $keyPair;
+
+        return $this;
+    }
+
+    /**
+     * @return KeyPair
+     */
+    public function getKeyPair()
+    {
+        return $this->keyPair;
+    }
+
+
 }

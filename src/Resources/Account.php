@@ -1,5 +1,7 @@
 <?php namespace Hyn\LetsEncrypt\Resources;
 
+use Hyn\LetsEncrypt\Acme\Client;
+
 /**
  * Class Account
  *
@@ -38,6 +40,6 @@ class Account
      */
     public function register()
     {
-
+        return (new Client())->register($this->emailAddress);
     }
 }
