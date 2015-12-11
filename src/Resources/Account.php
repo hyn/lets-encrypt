@@ -36,12 +36,18 @@ class Account
     {
         $this->username     = $username;
         $this->emailAddress = $emailAddress;
+
+        if(!$this->config("{$this->username}.key-pair"))
+        {
+            $this->acme()->register($this->emailAddress);
+            $this->getConfigurationStorage()->set("{$this->username}.key-pair", $this->acme()->getKeyPair());
+        }
     }
 
     /**
      * Register the account on the Acme server.
      */
-    public function register()
+    protected function register()
     {
         $acme = $this->acme();
 

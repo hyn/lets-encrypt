@@ -4,7 +4,7 @@ trait AcmeCallable {
     /**
      * @return Client
      */
-    protected function acme()
+    public function acme()
     {
         return (new Client());
     }
