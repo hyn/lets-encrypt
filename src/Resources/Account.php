@@ -49,16 +49,14 @@ class Account
      */
     protected function register()
     {
-        $acme = $this->acme();
-
         if($this->config("{$this->username}.key-pair"))
         {
-            $acme->setKeyPair($this->config("{$this->username}.key-pair"));
+            $this->acme()->setKeyPair($this->config("{$this->username}.key-pair"));
         }
 
-        $result = $acme->register($this->emailAddress);
+        $result = $this->acme()->register($this->emailAddress);
 
-        $this->getConfigurationStorage()->set("{$this->username}.key-pair", $acme->getKeyPair());
+        $this->getConfigurationStorage()->set("{$this->username}.key-pair", $this->acme()->getKeyPair());
 
         return $result;
     }

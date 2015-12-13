@@ -1,5 +1,7 @@
 <?php namespace Hyn\LetsEncrypt\Resources;
 
+use Hyn\LetsEncrypt\Helpers\KeyPairGenerator;
+
 class Certificate
 {
     /**
@@ -42,10 +44,12 @@ class Certificate
         return $this->hostnames;
     }
 
-
+    /**
+     * @return mixed
+     */
     public function request()
     {
-        $location = $this->account->acme()->requestCertificate($this->account->acme()->getKeyPair(), $this->hostnames);
+        $location = $this->account->acme()->requestCertificate(KeyPairGenerator::generate(), $this->hostnames);
         return $location;
     }
 }
