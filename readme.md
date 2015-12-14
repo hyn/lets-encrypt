@@ -1,5 +1,8 @@
 # hyn/lets-encrypt
 
+[![Latest Stable Version](https://poser.pugx.org/hyn/lets-encrypt/v/stable)][2]
+[![License](https://poser.pugx.org/hyn/lets-encrypt/license)][2]
+
 PHP wrapper for the Let's Encrypt api.
 
 ### Installation
@@ -8,12 +11,21 @@ PHP wrapper for the Let's Encrypt api.
 composer require hyn/lets-encrypt
 ```
 
-### Help
+### About
 
 This package is meant to ease development of Let's Encrypt functionality without
 requiring the python commandline utilities.
 
-
 ### Credits
 
 Developed by looking at [Petertjuh360's efforts](https://github.com/Petertjuh360/da-letsencrypt).
+
+### Useful links
+
+- [da-letsencrypt](https://github.com/Petertjuh360/da-letsencrypt)
+- [let's encrypt acme spec](https://letsencrypt.github.io/acme-spec/#rfc.section)
+- [let's encrypt documentation](https://letsencrypt.readthedocs.org/en/latest/)
+
+
+[1]: https://github.com/hyn/lets-encrypt
+[2]: https://packagist.org/packages/hyn/lets-encrypt
