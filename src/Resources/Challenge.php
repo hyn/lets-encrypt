@@ -1,6 +1,7 @@
 <?php namespace Hyn\LetsEncrypt\Resources;
 
 use Carbon\Carbon;
+use Hyn\LetsEncrypt\Exceptions\UnsolvableChallengeException;
 
 class Challenge
 {
@@ -68,6 +69,13 @@ class Challenge
 
         // loop through all challenges to find suitable challenge solvers
         foreach ($challenges as $id => $challenge) {
+
+            // check against combinations first
+            if(!in_array([$id], $combinations))
+            {
+                continue;
+            }
+
             $type   = ucfirst(str_replace([' ', '', '-'], null, $challenge->type));
 
             // look for a solver in the registered namespaces
@@ -75,11 +83,26 @@ class Challenge
             {
                 $solver = sprintf('%s\%s', $namespace, $type);
 
+                // a solver class has been found for this challenge type
                 if(class_exists($solver))
                 {
                     $this->challenges[$id] = $solver;
+                    break;
                 }
             }
+        }
+    }
+
+    public function solve()
+    {
+        if(empty($this->challenges))
+        {
+            throw new UnsolvableChallengeException("Missing challenge solver for {$this->hostname}");
+        }
+
+        foreach($this->challenges as $id => $solver)
+        {
+            return (new $solver)->solve($this);
         }
     }
 

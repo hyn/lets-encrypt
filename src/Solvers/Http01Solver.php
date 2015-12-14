@@ -1,6 +1,7 @@
 <?php namespace Hyn\LetsEncrypt\Solvers;
 
 use Hyn\LetsEncrypt\Contracts\ChallengeSolverContract;
+use Hyn\LetsEncrypt\Resources\Challenge;
 
 /**
  * Class Http01Solver
@@ -23,9 +24,10 @@ class Http01Solver implements ChallengeSolverContract
      *
      * Return false if not possible.
      *
+     * @param Challenge $challenge
      * @return bool
      */
-    public function solve()
+    public function solve(Challenge $challenge)
     {
         // TODO: Implement solve() method.
     }

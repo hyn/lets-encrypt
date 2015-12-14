@@ -50,24 +50,27 @@ class Certificate
     }
 
     /**
-     * @todo add challenges: https://github.com/Petertjuh360/da-letsencrypt/blob/master/user/actions/request.html#L59
      * @return mixed
      */
     public function request()
     {
         $challenges = $this->challenge();
 
-        $location = $this->account->acme()->requestCertificate(KeyPairGenerator::generate(), $this->hostnames);
+        $location     = $this->account->acme()->requestCertificate(KeyPairGenerator::generate(), $this->hostnames);
         $certificates = $this->account->acme()->pollForCertificate($location);
+
         return $certificates;
     }
 
+    /**
+     * @return array
+     */
     protected function challenge()
     {
         /** @var string $hostname */
-        foreach($this->hostnames as $hostname)
-        {
-            $this->challenges[$hostname] = new Challenge($this, $hostname, $this->account->acme()->requestChallenges($hostname));
+        foreach ($this->hostnames as $hostname) {
+            $this->challenges[$hostname] = new Challenge($this, $hostname,
+                $this->account->acme()->requestChallenges($hostname));
         }
 
         return $this->challenges;
