@@ -12,6 +12,11 @@ class Certificate
     protected $hostnames = [];
 
     /**
+     * @var array
+     */
+    protected $challenges = [];
+
+    /**
      * @var Account
      */
     protected $account;
@@ -59,16 +64,13 @@ class Certificate
 
     protected function challenge()
     {
-        $locations = [];
-
         /** @var string $hostname */
         foreach($this->hostnames as $hostname)
         {
-            list($locations[$hostname], $response) = $this->account->acme()->requestChallenges($hostname);
-
-            var_dump($locations);
-            var_dump($response);
+            $this->challenges[$hostname] = new Challenge($this, $hostname, $this->account->acme()->requestChallenges($hostname));
         }
+
+        return $this->challenges;
     }
 
     /**

@@ -11,7 +11,7 @@ use Hyn\LetsEncrypt\Contracts\ChallengeSolverContract;
  *      The location is declared using the prefix:
  *      `.well-known/acme-challenge/` and concluded
  *      with the token value.
- *      Eg: yoursite.com/.well-known/acme-challenge/evaGxfADs6pSRb2LAv9IZf17Dt3juxGJ-PCt92wr-oA
+ *      Eg: yoursite.com/.well-known/acme-challenge/<token>
  *
  * @package Hyn\LetsEncrypt\Solvers
  */
