@@ -69,8 +69,9 @@ class Certificate
     {
         /** @var string $hostname */
         foreach ($this->hostnames as $hostname) {
-            $this->challenges[$hostname] = new Challenge($this, $hostname,
-                $this->account->acme()->requestChallenges($hostname));
+            $this->challenges[$hostname] = (new Challenge($this, $hostname,
+                $this->account->acme()->requestChallenges($hostname)))
+                ->solve();
         }
 
         return $this->challenges;

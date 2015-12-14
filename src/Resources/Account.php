@@ -1,6 +1,7 @@
 <?php namespace Hyn\LetsEncrypt\Resources;
 
 use Hyn\LetsEncrypt\Acme\AcmeCallable;
+use Hyn\LetsEncrypt\Contracts\ConfigurationStorageContract;
 use Hyn\LetsEncrypt\Helpers\Configured;
 
 /**
@@ -29,16 +30,20 @@ class Account
     /**
      * Account constructor.
      *
-     * @param $username
-     * @param $emailAddress
+     * @param                              $username
+     * @param                              $emailAddress
+     * @param ConfigurationStorageContract $configurationStorage
      */
-    public function __construct($username, $emailAddress)
+    public function __construct($username, $emailAddress, ConfigurationStorageContract $configurationStorage = null)
     {
         $this->username     = $username;
         $this->emailAddress = $emailAddress;
 
-        if(!$this->config("{$this->username}.key-pair"))
-        {
+        if ($configurationStorage) {
+            $this->setConfigurationStorage($configurationStorage);
+        }
+
+        if (!$this->config("{$this->username}.key-pair")) {
             $this->acme()->register($this->emailAddress);
             $this->getConfigurationStorage()->set("{$this->username}.key-pair", $this->acme()->getKeyPair());
         }
@@ -49,8 +54,7 @@ class Account
      */
     protected function register()
     {
-        if($this->config("{$this->username}.key-pair"))
-        {
+        if ($this->config("{$this->username}.key-pair")) {
             $this->acme()->setKeyPair($this->config("{$this->username}.key-pair"));
         }
 
