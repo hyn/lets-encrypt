@@ -93,6 +93,14 @@ class Challenge
         }
     }
 
+    /**
+     * Attempt to solve the challenge.
+     *
+     * The sequence can be influenced by setting the $solverLocations manually.
+     *
+     * @return mixed
+     * @throws UnsolvableChallengeException
+     */
     public function solve()
     {
         if(empty($this->challenges))
