@@ -98,7 +98,7 @@ class Challenge
      *
      * The sequence can be influenced by setting the $solverLocations manually.
      *
-     * @return booleans
+     * @return boolean
      * @throws UnsolvableChallengeException
      */
     public function solve()
