@@ -1,11 +1,12 @@
-<?php namespace Hyn\LetsEncrypt\Resources;
+<?php
+
+namespace Hyn\LetsEncrypt\Resources;
 
 use Carbon\Carbon;
 use Hyn\LetsEncrypt\Exceptions\UnsolvableChallengeException;
 
 class Challenge
 {
-
     /**
      * @var string
      */
@@ -40,7 +41,7 @@ class Challenge
      * @var array
      */
     protected static $solverLocations = [
-        'Hyn\LetsEncrypt\Solvers'
+        'Hyn\LetsEncrypt\Solvers',
     ];
 
     /**
@@ -53,12 +54,12 @@ class Challenge
     public function __construct(Certificate $certificate, $hostname, $result)
     {
         $this->certificate = $certificate;
-        $this->hostname    = $hostname;
+        $this->hostname = $hostname;
         list($this->location, $response) = $result;
 
-        $this->expires = Carbon::createFromFormat('Y-m-d?H:i:s.u', $this->fixZolo($response->expires), "UTC");
+        $this->expires = Carbon::createFromFormat('Y-m-d?H:i:s.u', $this->fixZolo($response->expires), 'UTC');
 
-        $this->status  = $response->status;
+        $this->status = $response->status;
         $this->parseChallenges($response->challenges, $response->combinations);
     }
 
@@ -66,14 +67,15 @@ class Challenge
      * Some weird formatting is occurring that Carbon and DateTime cannot parse.
      *
      * @param $expires
+     *
      * @return string
      */
     protected function fixZolo($expires)
     {
-        if(preg_match('/\.([0-9]+)([A-Z]+)$/', $expires, $m))
-        {
-            $expires = substr($expires, 0, -(strlen($m[2]) + strlen($m[1])-6));
+        if (preg_match('/\.([0-9]+)([A-Z]+)$/', $expires, $m)) {
+            $expires = substr($expires, 0, -(strlen($m[2]) + strlen($m[1]) - 6));
         }
+
         return $expires;
     }
 
@@ -82,6 +84,7 @@ class Challenge
      *
      * @param array $challenges
      * @param array $combinations
+     *
      * @return array
      */
     protected function parseChallenges($challenges = [], $combinations = [])
@@ -94,23 +97,20 @@ class Challenge
         foreach ($challenges as $id => $challenge) {
 
             // check against combinations first
-            if(!in_array([$id], $combinations))
-            {
+            if (!in_array([$id], $combinations)) {
                 continue;
             }
 
-            $type   = ucfirst(str_replace([' ', '', '-'], null, $challenge->type));
+            $type = ucfirst(str_replace([' ', '', '-'], null, $challenge->type));
 
             // look for a solver in the registered namespaces
-            foreach(array_reverse(static::$solverLocations) as $namespace)
-            {
+            foreach (array_reverse(static::$solverLocations) as $namespace) {
                 $solver = sprintf('%s\%sSolver', $namespace, $type);
                 // a solver class has been found for this challenge type
-                if(class_exists($solver))
-                {
+                if (class_exists($solver)) {
                     $this->challenges[$id] = [
                         'payload' => $challenge,
-                        'solver' => $solver
+                        'solver'  => $solver,
                     ];
                     break;
                 }
@@ -123,25 +123,26 @@ class Challenge
      *
      * The sequence can be influenced by setting the $solverLocations manually.
      *
-     * @return boolean
      * @throws UnsolvableChallengeException
+     *
+     * @return bool
      */
     public function solve()
     {
-        if(empty($this->challenges))
-        {
+        if (empty($this->challenges)) {
             throw new UnsolvableChallengeException("Missing challenge solver for {$this->hostname}");
         }
 
-        foreach($this->challenges as $id => $challenge)
-        {
+        foreach ($this->challenges as $id => $challenge) {
             $solver = array_get($challenge, 'solver');
-            return (new $solver)->solve($this, array_get($challenge, 'payload', []));
+
+            return (new $solver())->solve($this, array_get($challenge, 'payload', []));
         }
     }
 
     /**
      * @param mixed $hostname
+     *
      * @return Challenge
      */
     public function setHostname($hostname)

@@ -1,4 +1,6 @@
-<?php namespace Hyn\LetsEncrypt\Helpers;
+<?php
+
+namespace Hyn\LetsEncrypt\Helpers;
 
 use Crypt_RSA;
 use Kelunik\Acme\KeyPair;

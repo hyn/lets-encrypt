@@ -1,3 +1,7 @@
-<?php namespace Hyn\LetsEncrypt\Exceptions;
+<?php
 
-class UnsolvableChallengeException extends \Exception {}
+namespace Hyn\LetsEncrypt\Exceptions;
+
+class UnsolvableChallengeException extends \Exception
+{
+}

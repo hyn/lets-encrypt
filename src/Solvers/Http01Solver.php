@@ -1,10 +1,12 @@
-<?php namespace Hyn\LetsEncrypt\Solvers;
+<?php
+
+namespace Hyn\LetsEncrypt\Solvers;
 
 use Hyn\LetsEncrypt\Contracts\ChallengeSolverContract;
 use Hyn\LetsEncrypt\Resources\Challenge;
 
 /**
- * Class Http01Solver
+ * Class Http01Solver.
  *
  * @see https://letsencrypt.github.io/acme-spec/#simple-http
  *
@@ -13,18 +15,16 @@ use Hyn\LetsEncrypt\Resources\Challenge;
  *      `.well-known/acme-challenge/` and concluded
  *      with the token value.
  *      Eg: yoursite.com/.well-known/acme-challenge/<token>
- *
- * @package Hyn\LetsEncrypt\Solvers
  */
 class Http01Solver implements ChallengeSolverContract
 {
-
     /**
      * Solves a certain challenge.
      *
      * Return false if not possible.
      *
      * @param Challenge $challenge
+     *
      * @return bool
      */
     public function solve(Challenge $challenge)

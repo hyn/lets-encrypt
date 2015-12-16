@@ -1,13 +1,13 @@
-<?php namespace Hyn\LetsEncrypt\Resources;
+<?php
+
+namespace Hyn\LetsEncrypt\Resources;
 
 use Hyn\LetsEncrypt\Acme\AcmeCallable;
 use Hyn\LetsEncrypt\Contracts\ConfigurationStorageContract;
 use Hyn\LetsEncrypt\Helpers\Configured;
 
 /**
- * Class Account
- *
- * @package Hyn\LetsEncrypt\Resources
+ * Class Account.
  */
 class Account
 {
@@ -36,7 +36,7 @@ class Account
      */
     public function __construct($username, $emailAddress, ConfigurationStorageContract $configurationStorage = null)
     {
-        $this->username     = $username;
+        $this->username = $username;
         $this->emailAddress = $emailAddress;
 
         if ($configurationStorage) {

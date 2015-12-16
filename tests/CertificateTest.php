@@ -1,7 +1,9 @@
-<?php namespace Hyn\LetsEncrypt\Tests;
+<?php
 
-use Hyn\LetsEncrypt\Resources\Certificate;
+namespace Hyn\LetsEncrypt\Tests;
+
 use Hyn\LetsEncrypt\Resources\Account;
+use Hyn\LetsEncrypt\Resources\Certificate;
 
 class CertificateTest extends \PHPUnit_Framework_TestCase
 {

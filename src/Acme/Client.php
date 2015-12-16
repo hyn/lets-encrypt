@@ -1,15 +1,14 @@
-<?php namespace Hyn\LetsEncrypt\Acme;
+<?php
 
-use Crypt_RSA;
+namespace Hyn\LetsEncrypt\Acme;
+
 use Hyn\LetsEncrypt\Helpers\KeyPairGenerator;
 use Kelunik\Acme\AcmeClient;
 use Kelunik\Acme\AcmeService;
 use Kelunik\Acme\KeyPair;
 
 /**
- * Class Client
- *
- * @package Hyn\LetsEncrypt\Acme
+ * Class Client.
  */
 class Client
 {
@@ -43,6 +42,7 @@ class Client
 
     /**
      * @param AcmeClient $acmeClient
+     *
      * @return Client
      */
     public function setAcmeClient($acmeClient)
@@ -54,6 +54,7 @@ class Client
 
     /**
      * @param AcmeService $acmeService
+     *
      * @return Client
      */
     public function setAcmeService($acmeService)
@@ -65,6 +66,7 @@ class Client
 
     /**
      * @param string $dictionaryEndpoint
+     *
      * @return Client
      */
     public function setDictionaryEndpoint($dictionaryEndpoint)
@@ -107,9 +109,10 @@ class Client
      *
      * @param $name
      * @param $arguments
+     *
      * @return mixed
      */
-    function __call($name, $arguments)
+    public function __call($name, $arguments)
     {
         $this->setup();
 
@@ -118,6 +121,7 @@ class Client
 
     /**
      * @param KeyPair $keyPair
+     *
      * @return Client
      */
     public function setKeyPair($keyPair)

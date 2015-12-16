@@ -1,8 +1,11 @@
-<?php namespace Hyn\LetsEncrypt\Contracts;
+<?php
+
+namespace Hyn\LetsEncrypt\Contracts;
 
 use Hyn\LetsEncrypt\Resources\Challenge;
 
-interface ChallengeSolverContract {
+interface ChallengeSolverContract
+{
     /**
      * Solves a certain challenge.
      *
@@ -10,6 +13,7 @@ interface ChallengeSolverContract {
      *
      * @param Challenge $challenge
      * @param array     $payload
+     *
      * @return bool
      */
     public function solve(Challenge $challenge, $payload = []);

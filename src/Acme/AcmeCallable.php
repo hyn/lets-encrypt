@@ -1,21 +1,23 @@
-<?php namespace Hyn\LetsEncrypt\Acme;
+<?php
 
-trait AcmeCallable {
+namespace Hyn\LetsEncrypt\Acme;
 
+trait AcmeCallable
+{
     /**
      * @var null|Client
      */
-    static protected $acmeClient;
+    protected static $acmeClient;
 
     /**
      * @return Client
      */
     public function acme()
     {
-        if(!static::$acmeClient)
-        {
+        if (!static::$acmeClient) {
             static::$acmeClient = (new Client());
         }
+
         return static::$acmeClient;
     }
 }

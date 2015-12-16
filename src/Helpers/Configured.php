@@ -1,11 +1,12 @@
-<?php namespace Hyn\LetsEncrypt\Helpers;
+<?php
+
+namespace Hyn\LetsEncrypt\Helpers;
 
 use Hyn\LetsEncrypt\Contracts\ConfigurationStorageContract;
 use Hyn\LetsEncrypt\Storages\Configuration\DiskStorage;
 
 trait Configured
 {
-
     /**
      * @var ConfigurationStorageContract
      */
@@ -14,6 +15,7 @@ trait Configured
     /**
      * @param      $key
      * @param null $default
+     *
      * @return mixed
      */
     public function config($key, $default = null)
@@ -26,10 +28,10 @@ trait Configured
      */
     public function getConfigurationStorage()
     {
-        if(empty($this->configurationStorage))
-        {
+        if (empty($this->configurationStorage)) {
             $this->setConfigurationStorage(new DiskStorage('/tmp/hyn-lets-encrypt'));
         }
+
         return $this->configurationStorage;
     }
 
