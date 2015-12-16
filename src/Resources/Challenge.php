@@ -56,11 +56,34 @@ class Challenge
         $this->hostname    = $hostname;
         list($this->location, $response) = $result;
 
-        $this->expires = new Carbon($response->expires);
+        $this->expires = Carbon::createFromFormat('Y-m-d?H:i:s.u', $this->fixZolo($response->expires), "UTC");
+
         $this->status  = $response->status;
         $this->parseChallenges($response->challenges, $response->combinations);
     }
 
+    /**
+     * Some weird formatting is occurring that Carbon and DateTime cannot parse.
+     *
+     * @param $expires
+     * @return string
+     */
+    protected function fixZolo($expires)
+    {
+        if(preg_match('/\.([0-9]+)([A-Z]+)$/', $expires, $m))
+        {
+            $expires = substr($expires, 0, -(strlen($m[2]) + strlen($m[1])-6));
+        }
+        return $expires;
+    }
+
+    /**
+     * Work through the challenges and solve them.
+     *
+     * @param array $challenges
+     * @param array $combinations
+     * @return array
+     */
     protected function parseChallenges($challenges = [], $combinations = [])
     {
         if (empty($challenges) || empty($combinations)) {
@@ -81,12 +104,14 @@ class Challenge
             // look for a solver in the registered namespaces
             foreach(array_reverse(static::$solverLocations) as $namespace)
             {
-                $solver = sprintf('%s\%s', $namespace, $type);
-
+                $solver = sprintf('%s\%sSolver', $namespace, $type);
                 // a solver class has been found for this challenge type
                 if(class_exists($solver))
                 {
-                    $this->challenges[$id] = $solver;
+                    $this->challenges[$id] = [
+                        'payload' => $challenge,
+                        'solver' => $solver
+                    ];
                     break;
                 }
             }
@@ -108,9 +133,10 @@ class Challenge
             throw new UnsolvableChallengeException("Missing challenge solver for {$this->hostname}");
         }
 
-        foreach($this->challenges as $id => $solver)
+        foreach($this->challenges as $id => $challenge)
         {
-            return (new $solver)->solve($this);
+            $solver = array_get($challenge, 'solver');
+            return (new $solver)->solve($this, array_get($challenge, 'payload', []));
         }
     }
 

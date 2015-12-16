@@ -9,7 +9,8 @@ interface ChallengeSolverContract {
      * Return false if not possible.
      *
      * @param Challenge $challenge
+     * @param array     $payload
      * @return bool
      */
-    public function solve(Challenge $challenge);
+    public function solve(Challenge $challenge, $payload = []);
 }
