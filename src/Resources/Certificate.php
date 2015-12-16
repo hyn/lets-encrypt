@@ -1,4 +1,6 @@
-<?php namespace Hyn\LetsEncrypt\Resources;
+<?php
+
+namespace Hyn\LetsEncrypt\Resources;
 
 use Hyn\LetsEncrypt\Helpers\KeyPairGenerator;
 
@@ -30,6 +32,7 @@ class Certificate
      * Add a hostname for a certificate request.
      *
      * @param $hostname
+     *
      * @return $this
      */
     public function addHostname($hostname)
@@ -56,7 +59,7 @@ class Certificate
     {
         $challenges = $this->challenge();
 
-        $location     = $this->account->acme()->requestCertificate(KeyPairGenerator::generate(), $this->hostnames);
+        $location = $this->account->acme()->requestCertificate(KeyPairGenerator::generate(), $this->hostnames);
         $certificates = $this->account->acme()->pollForCertificate($location);
 
         return $certificates;

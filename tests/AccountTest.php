@@ -1,4 +1,6 @@
-<?php namespace Hyn\LetsEncrypt\Tests;
+<?php
+
+namespace Hyn\LetsEncrypt\Tests;
 
 use Hyn\LetsEncrypt\Resources\Account;
 

@@ -1,4 +1,6 @@
-<?php namespace Hyn\LetsEncrypt\Storages\Configuration;
+<?php
+
+namespace Hyn\LetsEncrypt\Storages\Configuration;
 
 use Hyn\LetsEncrypt\Contracts\ConfigurationStorageContract;
 
@@ -30,6 +32,7 @@ class DiskStorage implements ConfigurationStorageContract
      *
      * @param      $key
      * @param null $default
+     *
      * @return mixed
      */
     public function get($key, $default = null)
@@ -46,6 +49,7 @@ class DiskStorage implements ConfigurationStorageContract
      *
      * @param $key
      * @param $value
+     *
      * @return mixed
      */
     public function set($key, $value)
@@ -55,17 +59,19 @@ class DiskStorage implements ConfigurationStorageContract
 
     /**
      * @param $key
+     *
      * @return string
      */
     protected function getKeyPath($key)
     {
-        return sprintf("%s/%s", $this->path, $key);
+        return sprintf('%s/%s', $this->path, $key);
     }
 
     /**
      * Resets a value in the storage.
      *
      * @param $key
+     *
      * @return mixed
      */
     public function reset($key)
