@@ -38,7 +38,7 @@ class Certificate
      */
     public function __construct(Account $account, $identifier = null)
     {
-        $this->account    = $account;
+        $this->account = $account;
         $this->identifier = $identifier;
     }
 
@@ -73,7 +73,7 @@ class Certificate
     {
         $challenges = $this->challenge();
 
-        $location     = $this->account->acme()->requestCertificate(KeyPairGenerator::generate(), $this->hostnames);
+        $location = $this->account->acme()->requestCertificate(KeyPairGenerator::generate(), $this->hostnames);
         $certificates = $this->account->acme()->pollForCertificate($location);
 
         return $certificates;
@@ -112,6 +112,7 @@ class Certificate
 
     /**
      * @param mixed $identifier
+     *
      * @return $this
      */
     public function setIdentifier($identifier)
