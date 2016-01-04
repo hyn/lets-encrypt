@@ -23,9 +23,23 @@ class Certificate
      */
     protected $account;
 
-    public function __construct(Account $account)
+    /**
+     * A custom identifier to use in your applications.
+     *
+     * @var mixed
+     */
+    protected $identifier;
+
+    /**
+     * Certificate constructor.
+     *
+     * @param Account $account
+     * @param null    $identifier A custom identifier to use in your applications.
+     */
+    public function __construct(Account $account, $identifier = null)
     {
-        $this->account = $account;
+        $this->account    = $account;
+        $this->identifier = $identifier;
     }
 
     /**
@@ -59,7 +73,7 @@ class Certificate
     {
         $challenges = $this->challenge();
 
-        $location = $this->account->acme()->requestCertificate(KeyPairGenerator::generate(), $this->hostnames);
+        $location     = $this->account->acme()->requestCertificate(KeyPairGenerator::generate(), $this->hostnames);
         $certificates = $this->account->acme()->pollForCertificate($location);
 
         return $certificates;
@@ -86,5 +100,24 @@ class Certificate
     public function getAccount()
     {
         return $this->account;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
+    }
+
+    /**
+     * @param mixed $identifier
+     * @return $this
+     */
+    public function setIdentifier($identifier)
+    {
+        $this->identifier = $identifier;
+
+        return $this;
     }
 }

@@ -55,6 +55,7 @@ class Challenge
     {
         $this->certificate = $certificate;
         $this->hostname = $hostname;
+
         list($this->location, $response) = $result;
 
         $this->expires = Carbon::createFromFormat('Y-m-d?H:i:s.u', $this->fixZolo($response->expires), 'UTC');
@@ -212,5 +213,13 @@ class Challenge
     public static function getSolverLocations()
     {
         return static::$solverLocations;
+    }
+
+    /**
+     * @return Certificate
+     */
+    public function getCertificate()
+    {
+        return $this->certificate;
     }
 }
