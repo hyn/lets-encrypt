@@ -17,16 +17,18 @@ use Hyn\LetsEncrypt\Resources\Challenge;
  */
 class Dns01Solver implements ChallengeSolverContract
 {
+
     /**
      * Solves a certain challenge.
      *
      * Return false if not possible.
      *
      * @param Challenge $challenge
+     * @param array     $payload
      *
      * @return bool
      */
-    public function solve(Challenge $challenge)
+    public function solve(Challenge $challenge, $payload = [])
     {
         // TODO: Implement solve() method.
     }
