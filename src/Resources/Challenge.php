@@ -62,6 +62,7 @@ class Challenge
         $this->expires = Carbon::createFromFormat('Y-m-d?H:i:s.u', $this->fixZolo($response->expires), 'UTC');
 
         $this->status = $response->status;
+
         $this->parseChallenges($response->challenges, $response->combinations);
     }
 
@@ -222,5 +223,13 @@ class Challenge
     public function getCertificate()
     {
         return $this->certificate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->location;
     }
 }
