@@ -18,7 +18,6 @@ use Hyn\LetsEncrypt\Resources\Challenge;
  */
 class Http01Solver implements ChallengeSolverContract
 {
-
     /**
      * Solves a certain challenge.
      *
