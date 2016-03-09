@@ -24,11 +24,11 @@ class Http01Solver implements ChallengeSolverContract
      * Return false if not possible.
      *
      * @param Challenge $challenge
-     * @param array     $payload
+     * @param \stdClass $payload
      *
      * @return bool
      */
-    public function solve(Challenge $challenge, $payload = [])
+    public function solve(Challenge $challenge, $payload)
     {
         // TODO: Implement solve() method.
     }
