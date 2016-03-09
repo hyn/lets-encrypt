@@ -18,6 +18,7 @@
         "wouter0100/acme": "dev-master",
         "amphp/artax": "2.x-dev",
         "nesbot/carbon": "^1.0.0",
+        "illuminate/support": "^5.2",
         "phpseclib/phpseclib": "^2.0"
     },
     "require-dev": {

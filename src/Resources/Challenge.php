@@ -4,6 +4,7 @@ namespace Hyn\LetsEncrypt\Resources;
 
 use Carbon\Carbon;
 use Hyn\LetsEncrypt\Exceptions\UnsolvableChallengeException;
+use Illuminate\Support\Arr;
 
 class Challenge
 {
@@ -98,7 +99,7 @@ class Challenge
         foreach ($challenges as $id => $challenge) {
 
             // check against combinations first
-            if (!in_array([$id], $combinations)) {
+            if (! in_array([$id], $combinations)) {
                 continue;
             }
 
@@ -135,9 +136,9 @@ class Challenge
         }
 
         foreach ($this->challenges as $id => $challenge) {
-            $solver = array_get($challenge, 'solver');
+            $solver = Arr::get($challenge, 'solver');
 
-            return (new $solver())->solve($this, array_get($challenge, 'payload', []));
+            return (new $solver())->solve($this, Arr::get($challenge, 'payload', []));
         }
     }
 
