@@ -17,7 +17,6 @@ use Hyn\LetsEncrypt\Resources\Challenge;
  */
 class Dns01Solver implements ChallengeSolverContract
 {
-
     /**
      * Solves a certain challenge.
      *

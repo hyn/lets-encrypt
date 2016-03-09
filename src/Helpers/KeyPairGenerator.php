@@ -2,8 +2,8 @@
 
 namespace Hyn\LetsEncrypt\Helpers;
 
-use phpseclib\Crypt\RSA;
 use Kelunik\Acme\KeyPair;
+use phpseclib\Crypt\RSA;
 
 abstract class KeyPairGenerator
 {
