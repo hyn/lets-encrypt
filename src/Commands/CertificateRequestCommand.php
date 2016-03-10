@@ -15,6 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CertificateRequestCommand extends Command
 {
     use Configured;
+
     /**
      * {@inheritdoc}
      */
@@ -37,6 +38,7 @@ class CertificateRequestCommand extends Command
     {
         if (!count($input->getArgument('hostnames'))) {
             $output->writeln('<error>You need to specify valid hostnames!</error>');
+
             return;
         }
 
@@ -53,8 +55,9 @@ class CertificateRequestCommand extends Command
         $challenge_path = "{$public_path}/.well-known/acme-challenge/";
 
         if (!is_dir($challenge_path)) {
-            if( !mkdir($challenge_path, 0755, true)) {
-                $output->writeln('<error>Unable to generate the acme challenge directory in the specified public directory, manually create path or set ownership to: ' . $challenge_path);
+            if (!mkdir($challenge_path, 0755, true)) {
+                $output->writeln('<error>Unable to generate the acme challenge directory in the specified public directory, manually create path or set ownership to: '.$challenge_path);
+
                 return;
             }
         }
@@ -64,7 +67,7 @@ class CertificateRequestCommand extends Command
 
         $account = new Account($input->getOption('account'), $input->getOption('email'));
         $certificate = new Certificate($account);
-        foreach($input->getArgument('hostnames') as $hostname) {
+        foreach ($input->getArgument('hostnames') as $hostname) {
             $certificate->addHostname($hostname);
         }
         dd($certificate->request());
