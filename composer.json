@@ -35,5 +35,6 @@
             "Hyn\\LetsEncrypt\\Tests\\": "tests/"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "bin": ["bin/hyn-le"]
 }
