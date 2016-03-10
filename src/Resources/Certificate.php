@@ -3,6 +3,7 @@
 namespace Hyn\LetsEncrypt\Resources;
 
 use Hyn\LetsEncrypt\Helpers\KeyPairGenerator;
+use Kelunik\Acme\KeyPair;
 
 class Certificate
 {
@@ -145,7 +146,7 @@ class Certificate
     }
 
     /**
-     * @return string
+     * @return KeyPair
      */
     public function getKey()
     {

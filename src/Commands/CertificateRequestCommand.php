@@ -56,7 +56,7 @@ class CertificateRequestCommand extends Command
         }
 
         if ($certificate) {
-            return $this->saveResult($certificate);
+            return $this->saveResult($certificate, $input, $output);
         }
     }
 
@@ -71,7 +71,7 @@ class CertificateRequestCommand extends Command
         $file_base_name = $input->getArgument('hostnames')[0];
 
         $pemSize = file_put_contents("$target_path/$file_base_name.pem", $certificate->getCertificate() ."\r\n". $certificate->getBundle());
-        $keySize = file_put_contents("$target_path/$file_base_name.key", $certificate->getKey());
+        $keySize = file_put_contents("$target_path/$file_base_name.key", $certificate->getKey()->getPrivate());
 
         if($pemSize > 0 && $keySize > 0) {
             $output->writeln('<info>Certificate key and pem files written to '.$target_path.'/'.$file_base_name.'.pem/key');
@@ -100,10 +100,13 @@ class CertificateRequestCommand extends Command
         Http01Solver::setChallengePublicPath($challenge_path);
 
         $account = new Account($input->getOption('account'), $input->getOption('email'));
+
         $certificate = new Certificate($account);
+
         foreach($input->getArgument('hostnames') as $hostname) {
             $certificate->addHostname($hostname);
         }
+
         $result = $certificate->request();
 
         $certificate->setCertificate(Arr::get($result, 0));
