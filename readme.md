@@ -7,6 +7,8 @@ PHP wrapper for the Let's Encrypt api.
 
 ## Use as terminal command
 
+The command allows you to generate certificate files (pem and key). Installation into your webserver is still your own responsibility.
+
 ```
 composer global require hyn/lets-encrypt
 ```
@@ -26,6 +28,8 @@ hyn-le certificate:request <hostname> <another-hostname-perhaps> --http <path_to
 Use `hyn-le help certificate:request` for more information on all options.
 
 ## Use as package
+
+Allows further automation of SSL generation.
 
 ```
 composer require hyn/lets-encrypt
