@@ -11,7 +11,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CertificateRequestCommand extends Command
 {
-
     /**
      * {@inheritdoc}
      */
@@ -41,16 +40,14 @@ class CertificateRequestCommand extends Command
         $challenge_path = "{$public_path}/.well-known/acme-challenge/";
 
         if (!is_dir($challenge_path)) {
-            if( !mkdir($challenge_path, 0755, true)) {
-                $output->writeln('<error>Unable to generate the acme challenge directory in the specified public directory, manually create path or set ownership to: ' . $challenge_path);
+            if (!mkdir($challenge_path, 0755, true)) {
+                $output->writeln('<error>Unable to generate the acme challenge directory in the specified public directory, manually create path or set ownership to: '.$challenge_path);
+
                 return;
             }
         }
 
         // Set the challenge path.
         Http01Solver::setChallengePublicPath($challenge_path);
-
-
-
     }
 }
