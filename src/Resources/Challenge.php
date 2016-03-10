@@ -139,7 +139,7 @@ class Challenge
         foreach ($this->challenges as $id => $challenge) {
             $solver = Arr::get($challenge, 'solver');
 
-            return (new $solver())->solve($this, Arr::get($challenge, 'payload', []));
+            return (new $solver())->solve($this, Arr::get($challenge, 'payload'));
         }
     }
 

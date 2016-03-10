@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "575e786cb607460339954bfd1ba9637d",
-    "content-hash": "8ecf5825c7f0b5c0e9dc670bba9e2029",
+    "hash": "7439d0df111143cdaa4f7ceb06c81dfe",
+    "content-hash": "e25a5192c43e36c56ad796be5938ca70",
     "packages": [
         {
             "name": "amphp/amp",
-            "version": "v1.0.8",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/amp.git",
-                "reference": "4b667478f4b70a62e0f3abe7cfb8250e5a11ce0f"
+                "reference": "093d33c36c72c0b4bf505000eb53b97351939279"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/amp/zipball/4b667478f4b70a62e0f3abe7cfb8250e5a11ce0f",
-                "reference": "4b667478f4b70a62e0f3abe7cfb8250e5a11ce0f",
+                "url": "https://api.github.com/repos/amphp/amp/zipball/093d33c36c72c0b4bf505000eb53b97351939279",
+                "reference": "093d33c36c72c0b4bf505000eb53b97351939279",
                 "shasum": ""
             },
             "require": {
@@ -62,7 +62,7 @@
                 "non-blocking",
                 "promise"
             ],
-            "time": "2016-02-22 22:17:50"
+            "time": "2016-03-09 13:10:31"
         },
         {
             "name": "amphp/artax",
@@ -70,12 +70,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/artax.git",
-                "reference": "6679833f65b055533e8777a2a2cb248b8e573877"
+                "reference": "cc665ac890322188bad8b80722d64af6207b770d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/artax/zipball/6679833f65b055533e8777a2a2cb248b8e573877",
-                "reference": "6679833f65b055533e8777a2a2cb248b8e573877",
+                "url": "https://api.github.com/repos/amphp/artax/zipball/cc665ac890322188bad8b80722d64af6207b770d",
+                "reference": "cc665ac890322188bad8b80722d64af6207b770d",
                 "shasum": ""
             },
             "require": {
@@ -120,7 +120,7 @@
                 "parallel",
                 "rest"
             ],
-            "time": "2016-02-04 23:58:31"
+            "time": "2016-03-09 11:33:42"
         },
         {
             "name": "amphp/cache",
@@ -798,8 +798,68 @@
             "time": "2016-03-08 02:29:27"
         },
         {
+            "name": "symfony/console",
+            "version": "v3.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/console.git",
+                "reference": "2ed5e2706ce92313d120b8fe50d1063bcfd12e04"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/console/zipball/2ed5e2706ce92313d120b8fe50d1063bcfd12e04",
+                "reference": "2ed5e2706ce92313d120b8fe50d1063bcfd12e04",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9",
+                "symfony/polyfill-mbstring": "~1.0"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/event-dispatcher": "~2.8|~3.0",
+                "symfony/process": "~2.8|~3.0"
+            },
+            "suggest": {
+                "psr/log": "For using the console logger",
+                "symfony/event-dispatcher": "",
+                "symfony/process": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Console\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Console Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-02-28 16:24:34"
+        },
+        {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
@@ -858,7 +918,7 @@
         },
         {
             "name": "symfony/polyfill-php56",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php56.git",
@@ -914,7 +974,7 @@
         },
         {
             "name": "symfony/polyfill-util",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-util.git",
