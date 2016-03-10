@@ -30,10 +30,16 @@ class CertificateRequestCommand extends Command
                 'Lets Encrypt email address.')
             ->addOption('http', false, InputOption::VALUE_OPTIONAL,
                 'Specify the public directory for this domain, solves the verification using file placement.', false)
-            ->addOption('dns', false, InputOption::VALUE_OPTIONAL,
-                'Set to true, to solve verification using DNS, will wait for you to set the record.', false);
+            ->addOption('target', 't', InputOption::VALUE_OPTIONAL,
+                'Specify the directory to save the resulting certificate into.', getcwd())
+//            ->addOption('dns', false, InputOption::VALUE_OPTIONAL,
+//                'Set to true, to solve verification using DNS, will wait for you to set the record.', false)
+        ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (!count($input->getArgument('hostnames'))) {
@@ -41,10 +47,34 @@ class CertificateRequestCommand extends Command
             return;
         }
 
+        $certificate = null;
+
         if ($input->getOption('http')) {
             $certificate = $this->runHttpMethod($input, $output);
         } elseif ($input->getOption('dns')) {
             // todo
+        }
+
+        if ($certificate) {
+            return $this->saveResult($certificate);
+        }
+    }
+
+    /**
+     * @param Certificate     $certificate
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     */
+    protected function saveResult(Certificate $certificate, InputInterface $input, OutputInterface $output)
+    {
+        $target_path = rtrim($input->getOption('target'), '/');
+        $file_base_name = $input->getArgument('hostnames')[0];
+
+        $pemSize = file_put_contents("$target_path/$file_base_name.pem", $certificate->getCertificate() ."\r\n". $certificate->getBundle());
+        $keySize = file_put_contents("$target_path/$file_base_name.key", $certificate->getKey());
+
+        if($pemSize > 0 && $keySize > 0) {
+            $output->writeln('<info>Certificate key and pem files written to '.$target_path.'/'.$file_base_name.'.pem/key');
         }
     }
 

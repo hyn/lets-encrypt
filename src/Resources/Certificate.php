@@ -162,7 +162,7 @@ class Certificate
      */
     public function setCertificate($certificate)
     {
-        $this->certificate = $certificate;
+        $this->certificate = trim($certificate);
 
         return $this;
     }
@@ -181,7 +181,7 @@ class Certificate
      */
     public function setBundle($bundle)
     {
-        $this->bundle = $bundle;
+        $this->bundle = trim($bundle);
 
         return $this;
     }
