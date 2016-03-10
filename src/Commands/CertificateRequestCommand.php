@@ -16,8 +16,8 @@ class CertificateRequestCommand extends Command {
     protected function configure()
     {
         $this->setName('certificate:request')
-            ->addArgument('hostnames', InputArgument::IS_ARRAY, 'Specify the hostnames you want to request a certificate for')
-            ->addOption('http', false, InputOption::VALUE_OPTIONAL, 'Specify the public directory for this domain, solves the verification using file placement')
+            ->addArgument('hostnames', InputArgument::IS_ARRAY, 'Specify the hostnames you want to request a certificate for [example.com www.example.com ..].')
+            ->addOption('http', false, InputOption::VALUE_OPTIONAL, 'Specify the public directory for this domain, solves the verification using file placement.')
             ->addOption('dns', false, InputOption::VALUE_OPTIONAL, 'Set to true, to solve verification using DNS, will wait for you to set the record.');
     }
 
