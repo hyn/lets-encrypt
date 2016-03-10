@@ -3,6 +3,9 @@
 
 namespace Hyn\LetsEncrypt;
 
+use Hyn\LetsEncrypt\Commands\CertificateRequestCommand;
+use Symfony\Component\Console\Application;
+
 foreach([__DIR__ .'/../vendor/autoload.php',__DIR__ .'/../../../autoload.php'] as $autoload) {
     if (file_exists($autoload)) {
         require_once $autoload;
@@ -10,3 +13,8 @@ foreach([__DIR__ .'/../vendor/autoload.php',__DIR__ .'/../../../autoload.php'] a
     }
 }
 
+$application = new Application;
+
+$application->add(new CertificateRequestCommand());
+
+$application->run();

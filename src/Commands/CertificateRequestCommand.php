@@ -4,7 +4,9 @@ namespace Hyn\LetsEncrypt\Commands;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class CertificateRequestCommand extends Command {
 
@@ -15,7 +17,13 @@ class CertificateRequestCommand extends Command {
     {
         $this->setName('certificate:request')
             ->addArgument('hostnames', InputArgument::IS_ARRAY, 'Specify the hostnames you want to request a certificate for')
-            ->addOption('http01', InputOption::VALUE_OPTIONAL, 'Specify the public directory for this domain, solves the verification using file placement')
-            ->addOption('dns01', InputOption::VALUE_OPTIONAL, 'Set to true, to solve verification using DNS, will wait for you to set the record.');
+            ->addOption('http', false, InputOption::VALUE_OPTIONAL, 'Specify the public directory for this domain, solves the verification using file placement')
+            ->addOption('dns', false, InputOption::VALUE_OPTIONAL, 'Set to true, to solve verification using DNS, will wait for you to set the record.');
     }
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+
+    }
+
 }
