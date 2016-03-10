@@ -17,7 +17,7 @@ class Client
      *
      * @var string
      */
-    protected $dictionaryEndpoint = 'https://acme-staging.api.letsencrypt.org/directory';
+    protected $dictionaryEndpoint = 'https://acme-v01.api.letsencrypt.org/directory';
     /**
      * @var AcmeClient
      */
