@@ -6,6 +6,7 @@ use Hyn\LetsEncrypt\Helpers\Configured;
 use Hyn\LetsEncrypt\Resources\Account;
 use Hyn\LetsEncrypt\Resources\Certificate;
 use Hyn\LetsEncrypt\Solvers\Http01Solver;
+use Illuminate\Support\Arr;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -41,12 +42,18 @@ class CertificateRequestCommand extends Command
         }
 
         if ($input->getOption('http')) {
-            return $this->runHttpMethod($input, $output);
+            $certificate = $this->runHttpMethod($input, $output);
         } elseif ($input->getOption('dns')) {
             // todo
         }
     }
 
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     * @return Certificate
+     * @throws \Exception
+     */
     protected function runHttpMethod(InputInterface $input, OutputInterface $output)
     {
         $public_path = rtrim($input->getOption('http'), '/');
@@ -67,6 +74,11 @@ class CertificateRequestCommand extends Command
         foreach($input->getArgument('hostnames') as $hostname) {
             $certificate->addHostname($hostname);
         }
-        dd($certificate->request());
+        $result = $certificate->request();
+
+        $certificate->setCertificate(Arr::get($result, 0));
+        $certificate->setBundle(Arr::get($result, 1));
+
+        return $certificate;
     }
 }

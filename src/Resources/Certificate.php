@@ -31,6 +31,28 @@ class Certificate
     protected $identifier;
 
     /**
+     * The certificate key.
+     *
+     * @var string
+     */
+    protected $key;
+
+    /**
+     * The certificate.
+     *
+     * @var string
+     */
+    protected $certificate;
+
+
+    /**
+     * The certificate bundle.
+     *
+     * @var string
+     */
+    protected $bundle;
+
+    /**
      * Certificate constructor.
      *
      * @param Account $account
@@ -73,7 +95,7 @@ class Certificate
     {
         $challenges = $this->challenge();
 
-        $location = $this->account->acme()->requestCertificate(KeyPairGenerator::generate(), $this->hostnames);
+        $location = $this->account->acme()->requestCertificate($this->getKey(), $this->hostnames);
         $certificates = $this->account->acme()->pollForCertificate($location);
 
         return $certificates;
@@ -120,5 +142,55 @@ class Certificate
         $this->identifier = $identifier;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getKey()
+    {
+        if (!$this->key) {
+            $this->key = KeyPairGenerator::generate();
+        }
+
+        return $this->key;
+    }
+
+    /**
+     * @param string $certificate
+     * @return Certificate
+     */
+    public function setCertificate($certificate)
+    {
+        $this->certificate = $certificate;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCertificate()
+    {
+        return $this->certificate;
+    }
+
+    /**
+     * @param string $bundle
+     * @return Certificate
+     */
+    public function setBundle($bundle)
+    {
+        $this->bundle = $bundle;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBundle()
+    {
+        return $this->bundle;
     }
 }
