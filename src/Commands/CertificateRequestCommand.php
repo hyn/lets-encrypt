@@ -8,8 +8,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CertificateRequestCommand extends Command {
-
+class CertificateRequestCommand extends Command
+{
     /**
      * {@inheritdoc}
      */
@@ -23,7 +23,5 @@ class CertificateRequestCommand extends Command {
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
     }
-
 }
