@@ -100,7 +100,7 @@ class Challenge
         foreach ($challenges as $id => $challenge) {
 
             // check against combinations first
-            if (! in_array([$id], $combinations)) {
+            if (!in_array([$id], $combinations)) {
                 continue;
             }
 
