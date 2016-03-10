@@ -70,7 +70,7 @@ class CertificateRequestCommand extends Command
         $target_path = rtrim($input->getOption('target'), '/');
         $file_base_name = $input->getArgument('hostnames')[0];
 
-        $pemSize = file_put_contents("$target_path/$file_base_name.pem", $certificate->getCertificate() ."\r\n". $certificate->getBundle());
+        $pemSize = file_put_contents("$target_path/$file_base_name.pem", $certificate->getCertificate() ."\n". $certificate->getBundle());
         $keySize = file_put_contents("$target_path/$file_base_name.key", $certificate->getKey()->getPrivate());
 
         if($pemSize > 0 && $keySize > 0) {
