@@ -20,6 +20,7 @@ class Http01Solver implements ChallengeSolverContract
 {
     /**
      * Path to store the challenge file.
+     *
      * @var string
      */
     protected static $challenge_public_path;
@@ -44,6 +45,7 @@ class Http01Solver implements ChallengeSolverContract
      * Sets the publicly available directory to store challenge files into.
      *
      * @param string $challenge_public_path
+     *
      * @throws \Exception
      */
     public static function setChallengePublicPath($challenge_public_path)
@@ -51,7 +53,7 @@ class Http01Solver implements ChallengeSolverContract
         if (is_dir($challenge_public_path)) {
             self::$challenge_public_path = rtrim($challenge_public_path, '/');
         } else {
-            throw new \Exception("Directory to write challenge files into, must exist.");
+            throw new \Exception('Directory to write challenge files into, must exist.');
         }
     }
 
@@ -73,7 +75,7 @@ class Http01Solver implements ChallengeSolverContract
 
         $httpFeedback = $this->acme()->generateHttp01Payload($this->token);
 
-        if (file_put_contents(static::$challenge_public_path . '/' . $this->token, $httpFeedback) === false) {
+        if (file_put_contents(static::$challenge_public_path.'/'.$this->token, $httpFeedback) === false) {
             return false;
         }
 
@@ -82,7 +84,7 @@ class Http01Solver implements ChallengeSolverContract
 
         $this->acme()->pollForChallenge($challenge->getLocation());
 
-        unlink(static::$challenge_public_path . '/' . $this->token);
+        unlink(static::$challenge_public_path.'/'.$this->token);
 
         return true;
     }
